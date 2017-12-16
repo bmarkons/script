@@ -28,6 +28,12 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ### Contributing
 
+Pull requests are always welcome. In case you notice any bug or simply want to propose an improvement, please feel free to open an issue.
+
+## Code of Conduct
+
+Please [be nice](https://github.com/bmarkons/script/blob/master/CODE_OF_CONDUCT.md).
+
 ### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
