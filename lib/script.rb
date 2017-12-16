@@ -7,8 +7,12 @@ class Script
     @engine = Script::Engine.new
   end
 
+  def engine
+    @engine
+  end
+
   def step(headline, &block)
-    @engine.register_step(headline, &block)
+    @engine.register_step(headline, block)
   end
 
   def run

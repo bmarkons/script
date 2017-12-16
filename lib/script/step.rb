@@ -4,7 +4,7 @@ class Script::Step
     @block = block
   end
 
-  def run(shared)
-    @block.call(shared)
+  def run
+    @block.call
   end
 end
