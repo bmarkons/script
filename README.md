@@ -36,13 +36,8 @@ require "script"
 
 deploy = Script.new
 
-deploy.step("Install gcloud tool") do
+deploy.step("Setup tools") do
 
-  lsb_release = `lsb_release -c -s`
-  cloud_sdk_repo = "cloud-sdk-#{lsb_release}"
-  `echo "deb http://packages.cloud.google.com/apt #{cloud_sdk_repo} main"`
-  `curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -`
-  `sudo apt-get update -qq`
   `sudo apt-get install -y google-cloud-sdk kubectl`
   `gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT_NAME`
   `gcloud config set project dummy-project`
