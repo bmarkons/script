@@ -1,5 +1,6 @@
 require "script/version"
 require "script/engine"
+require "script/step"
 
 class Script
   def initialize

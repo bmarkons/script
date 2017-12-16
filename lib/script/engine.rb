@@ -3,7 +3,17 @@ class Script::Engine
     @steps = []
   end
 
-  def register_step(headline, &block)
+  def steps
+    @steps
+  end
+
+  def register_step(headline, block)
     @steps << Script::Step.new(headline, block)
+  end
+
+  def run
+    @steps.each do |step|
+      step.run
+    end
   end
 end
