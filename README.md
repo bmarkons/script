@@ -25,7 +25,52 @@ require 'script'
 
 ## Usage
 
-TODO
+### Steps
+
+Reason about the step as a logical group of commands. Lets take for instance, the deploy script which builds a docker image, pushes it to Dockerhub and eventually creates the deployment on Kubernetes.
+
+```ruby
+#!/usr/local/bin/ruby
+
+require "script"
+
+deploy = Script.new
+
+deploy.step("Install gcloud tool") do
+
+  lsb_release = `lsb_release -c -s`
+  cloud_sdk_repo = "cloud-sdk-#{lsb_release}"
+  `echo "deb http://packages.cloud.google.com/apt #{cloud_sdk_repo} main"`
+  `curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -`
+  `sudo apt-get update -qq`
+  `sudo apt-get install -y google-cloud-sdk kubectl`
+  `gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT_NAME`
+  `gcloud config set project dummy-project`
+  `gcloud container clusters get-credentials default --zone us-east`
+  
+end
+
+deploy.step("Deploy docker image") do
+
+  `docker pull dummy`
+  `docker build --cache-from dummy -t dummy`
+  `docker build -t scripter/script .`
+  `docker push dummy`
+  
+end
+
+deploy.step("Deploy to Kubernetes cluster") do
+
+  `kubectl apply -f k8s.yml --record`
+  
+end
+
+# Finally, run the script
+
+deploy.run
+```
+
+The steps are run in order in which they are registered.
 
 ## Contributing
 
