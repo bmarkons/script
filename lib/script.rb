@@ -2,6 +2,8 @@ require "script/version"
 require "script/engine"
 require "script/step"
 
+require "colorize"
+
 class Script
   def initialize
     @engine = Script::Engine.new

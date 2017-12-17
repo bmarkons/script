@@ -5,16 +5,37 @@ class Script::Step
   end
 
   def run
-    puts "-" * 80
-    puts "Started: #{@headline}"
-    puts "-" * 80
-    puts ""
+    started_output
+    execute_block ? succeded_output : failed_output
+  end
 
+  private
+
+  def started_output
+    puts ("-" * 80).colorize(:yellow)
+    puts "Started: #{@headline}".colorize(:yellow)
+    puts ("-" * 80).colorize(:yellow)
+    puts ""
+  end
+
+  def succeded_output
+    puts ""
+    puts ("-" * 80).colorize(:green)
+    puts "Succeded: #{@headline}".colorize(:green)
+    puts ("-" * 80).colorize(:green)
+  end
+
+  def failed_output
+    puts ""
+    puts ("-" * 80).colorize(:red)
+    puts "Failed: #{@headline}".colorize(:red)
+    puts ("-" * 80).colorize(:red)
+  end
+
+  def execute_block
     @block.call
-
-    puts ""
-    puts "-" * 80
-    puts "Finished: #{@headline}"
-    puts "-" * 80
+    true
+  rescue
+    false
   end
 end
