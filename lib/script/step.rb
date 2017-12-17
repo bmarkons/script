@@ -5,6 +5,16 @@ class Script::Step
   end
 
   def run
+    puts "-" * 80
+    puts "Started: #{@headline}"
+    puts "-" * 80
+    puts ""
+
     @block.call
+
+    puts ""
+    puts "-" * 80
+    puts "Finished: #{@headline}"
+    puts "-" * 80
   end
 end
