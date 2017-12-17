@@ -1,23 +1,26 @@
 module Script::Output
   module_function
 
-  def print_started(step)
-    puts separator(:yellow)
-    puts "Started: #{@headline}".colorize(:yellow)
-    puts ""
+  def started(step)
+    [
+      separator,
+      "Started: #{step.headline}",
+      ""
+    ].join("\n").colorize(:yellow)
   end
 
-  def print_result(step)
+  def result(step)
     color = :green if step.result == :succeded
     color = :red   if step.result == :failed
-    text = "#{step.result.capitalize}: #{step.headline}"
 
-    puts ""
-    puts text.colorize(color)
-    puts separator(color)
+    [
+      "",
+      "#{step.result.capitalize}: #{step.headline}",
+      separator
+    ].join("\n").colorize(color)
   end
 
-  def separator(color)
-    ("-" * 80).colorize(color)
+  def separator
+    "-" * 80
   end
 end
