@@ -1,13 +1,14 @@
 # Script<img width="40" align="left" src="https://cdn.codementor.io/assets/topic/category_header/ruby-on-rails-bc9ab2af8d92eb4e7eb3211d548a09ad.png"> 
 
-The Script is everything you need to make the most of Ruby as fabulous scripting language.
+The Script is everything you need to make the most of Ruby, as fabulous scripting language.
 
-   * [Script](#script)
-      * [Setup](#setup)
-      * [Usage](#usage)
-      * [Contributing](#contributing)
-      * [License](#license)
-      * [Code of Conduct](#code-of-conduct)
+###### Table of contents
+- [Setup](#setup)
+- [Usage](#usage)
+  - [Steps](#steps)
+- [Contributing](#contributing)
+- [License](#license)
+- [Code of Conduct](#code-of-conduct)
 
 ## Setup
 
