@@ -13,7 +13,9 @@ class Script::Engine
 
   def run
     @steps.each do |step|
+      Script::Output.print_started(step)
       step.run
+      Script::Output.print_result(step)
     end
   end
 end

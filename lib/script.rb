@@ -1,6 +1,7 @@
 require "script/version"
 require "script/engine"
 require "script/step"
+require "script/output"
 
 require "colorize"
 
