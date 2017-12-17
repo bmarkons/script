@@ -12,14 +12,19 @@ RSpec.describe Script::Engine do
   end
 
   describe "#run" do
-    it "runs all registered steps" do
-      engine = engine_with_steps
+    before do
+      @engine = engine_with_steps
+      @engine.steps.each { |step| allow(step).to receive(:result).and_return(:succeded) }
+    end
 
-      engine.steps.each do |step|
+    it "runs all registered steps" do
+      @engine.steps.each do |step|
+        expect(STDOUT).to receive(:puts).with(Script::Output.started(step))
         expect(step).to receive(:run)
+        expect(STDOUT).to receive(:puts).with(Script::Output.result(step))
       end
 
-      engine.run
+      @engine.run
     end
   end
 end
