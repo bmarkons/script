@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["bmarkons"]
   spec.email         = ["mamaveb@gmail.com"]
 
-  spec.summary       = %q{"Ruby scripting"}
-  spec.description   = %q{"Gives you a hand with composing neat Ruby scripts."}
+  spec.summary       = %q{Ruby scripting}
+  spec.description   = %q{Gives you a hand with composing neat Ruby scripts.}
   spec.homepage      = "https://github.com/bmarkons/script"
   spec.license       = "MIT"
 
