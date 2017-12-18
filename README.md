@@ -38,27 +38,21 @@ require "script"
 deploy = Script.new
 
 deploy.step("Setup tools") do
-
   `sudo apt-get install -y google-cloud-sdk kubectl`
   `gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT_NAME`
   `gcloud config set project dummy-project`
   `gcloud container clusters get-credentials default --zone us-east`
-  
 end
 
 deploy.step("Deploy docker image") do
-
   `docker pull dummy`
   `docker build --cache-from dummy -t dummy`
   `docker build -t scripter/script .`
   `docker push dummy`
-  
 end
 
 deploy.step("Deploy to Kubernetes cluster") do
-
   `kubectl apply -f k8s.yml --record`
-  
 end
 
 # Finally, run the script
@@ -66,7 +60,9 @@ end
 deploy.run
 ```
 
-The steps are run in order in which they are registered.
+The steps are run in order in which they are registered. The previous run will result with the following output:
+
+![output](https://i.imgur.com/a6F2iAh.png)
 
 ## Contributing
 
