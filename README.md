@@ -6,6 +6,7 @@ The Script is everything you need to make the most of Ruby, as fabulous scriptin
 - [Setup](#setup)
 - [Usage](#usage)
   - [Steps](#steps)
+  - [Shareables](#shareables)
 - [Contributing](#contributing)
 - [License](#license)
 - [Code of Conduct](#code-of-conduct)
@@ -60,9 +61,26 @@ end
 deploy.run
 ```
 
-The steps are run in order in which they are registered. The previous run will result with the following output:
+The steps are run in order in which they are registered. The output from the script commands is nicely formatted and divided per steps:
 
 ![output](https://i.imgur.com/a6F2iAh.png)
+
+In case of an exception in one of the steps, the execution of the script is aborted instantly.
+
+### Shareables
+
+In case you need to share data between steps, you can pass hash of shareables to the step block:
+
+```ruby
+script.step("Step 1") do |shareables|
+  shareables["environment"] = "production"
+end
+
+script.step("Step 2") do |shareables|
+  environment = shareables["environment"]
+  puts "Deploying on #{environment} environment"
+end
+```
 
 ## Contributing
 
