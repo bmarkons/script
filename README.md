@@ -1,6 +1,6 @@
 # Script<img width="40" align="left" src="https://cdn.codementor.io/assets/topic/category_header/ruby-on-rails-bc9ab2af8d92eb4e7eb3211d548a09ad.png"> 
 
-The Script is everything you need to make the most of Ruby, as fabulous scripting language.
+The Script is everything you need to make the most of Ruby - a fabulous scripting language. The one started with idea of having nicely formatted output, but ended up in much more...
 
 ###### Table of contents
 - [Setup](#setup)
