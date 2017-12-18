@@ -4,8 +4,8 @@ class Script::Step
     @block = block
   end
 
-  def run
-    @block.call
+  def run(shareables)
+    @block.call(shareables)
     @result = :succeded
   rescue
     @result = :failed

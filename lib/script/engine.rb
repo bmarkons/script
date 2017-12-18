@@ -1,6 +1,7 @@
 class Script::Engine
   def initialize
     @steps = []
+    @shareables = {}
   end
 
   def steps
@@ -14,7 +15,7 @@ class Script::Engine
   def run
     @steps.each do |step|
       puts Script::Output.started(step)
-      step.run
+      step.run(@shareables)
       puts Script::Output.result(step)
 
       abort_run if step.result == :failed
