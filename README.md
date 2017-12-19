@@ -1,4 +1,4 @@
-# Script<img width="40" align="left" src="misc/ruby.png">
+# Script[<img width="40" align="left" src="misc/ruby.png">](https://github.com/bmarkons/script#script)
 
 The Script is everything you need to make the most of Ruby, as fabulous scripting language.
 
