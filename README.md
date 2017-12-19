@@ -1,4 +1,4 @@
-# Script<img width="40" align="left" src="https://cdn.codementor.io/assets/topic/category_header/ruby-on-rails-bc9ab2af8d92eb4e7eb3211d548a09ad.png"> 
+# Script<img width="40" align="left" src="misc/ruby.png">
 
 The Script is everything you need to make the most of Ruby, as fabulous scripting language.
 
@@ -43,7 +43,7 @@ deploy.step("Setup tools") do
   `gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT_NAME`
   `gcloud config set project dummy-project`
   `gcloud container clusters get-credentials default --zone us-east`
-  
+
 end
 
 deploy.step("Deploy docker image") do
@@ -52,13 +52,13 @@ deploy.step("Deploy docker image") do
   `docker build --cache-from dummy -t dummy`
   `docker build -t scripter/script .`
   `docker push dummy`
-  
+
 end
 
 deploy.step("Deploy to Kubernetes cluster") do
 
   `kubectl apply -f k8s.yml --record`
-  
+
 end
 
 # Finally, run the script
