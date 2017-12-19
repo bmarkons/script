@@ -6,6 +6,12 @@ require "script/output"
 require "colorize"
 
 class Script
+  def self.define
+    script = new
+    yield(script)
+    script.run
+  end
+
   def initialize
     @engine = Script::Engine.new
   end
