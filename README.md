@@ -1,4 +1,4 @@
-# Script<img width="40" align="left" src="https://cdn.codementor.io/assets/topic/category_header/ruby-on-rails-bc9ab2af8d92eb4e7eb3211d548a09ad.png"> 
+# Script[<img width="40" align="left" src="misc/ruby.png">](https://github.com/bmarkons/script#script)
 [![Build Status](https://semaphoreci.com/api/v1/bmarkons/script/branches/master/badge.svg)](https://semaphoreci.com/bmarkons/script)
 [![Gem Version](https://badge.fury.io/rb/script.svg)](https://badge.fury.io/rb/script)
 
