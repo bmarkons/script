@@ -3,14 +3,16 @@
 require "script"
 
 Script.define do |s|
-  s.step("step 1") do
-    puts "Step 1"
-    puts "Completed"
-    raise
-  end
+	s.step("setup") do
+		system("bundle install") 
+	end
 
-  s.step("step 2") do
-    puts "Step 2"
-    puts "Completed"
-  end
+	s.step("build") do
+		system("bundle exec rake spec")
+	end
+
+	s.step("deploy") do
+		system("gem push script-*")
+	end
 end
+

@@ -8,6 +8,7 @@ The Script is everything you need to make the most of Ruby - a fabulous scriptin
 - [Setup](#setup)
 - [Usage](#usage)
   - [Steps](#steps)
+  - [Output](#output)
   - [Shareables](#shareables)
 - [Contributing](#contributing)
 - [License](#license)
@@ -21,53 +22,141 @@ Install gem:
 gem install script
 ```
 
-And require it in your script file:
+Or add it as dependency to your Gemfile:
+
+```ruby
+gem 'script'
+```
+
+Then simply require it in your script file:
 
 ```
 require 'script'
 ```
 
+And you're good to go.
+
 ## Usage
 
 ### Steps
 
-Reason about the step as a logical group of commands. Lets take for instance, the deploy script which builds a docker image, pushes it to Dockerhub and eventually creates the deployment on Kubernetes.
+Steps encourages you to split commands into higher level constructs which are essential for more complex scripts. 
+
+Use Script to define the steps:
 
 ```ruby
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 
 require "script"
 
-deploy = Script.new
+Script.define do |s|
+  s.step("step 1") do
+    # Commands
+  end
 
-deploy.step("Setup tools") do
-  `sudo apt-get install -y google-cloud-sdk kubectl`
-  `gcloud auth activate-service-account $GCLOUD_SERVICE_ACCOUNT_NAME`
-  `gcloud config set project dummy-project`
-  `gcloud container clusters get-credentials default --zone us-east`
+  s.step("step 2") do
+    # Commands
+  end
 end
-
-deploy.step("Deploy docker image") do
-  `docker pull dummy`
-  `docker build --cache-from dummy -t dummy`
-  `docker build -t scripter/script .`
-  `docker push dummy`
-end
-
-deploy.step("Deploy to Kubernetes cluster") do
-  `kubectl apply -f k8s.yml --record`
-end
-
-# Finally, run the script
-
-deploy.run
 ```
 
-The steps are run in order in which they are registered. The output from the script commands is nicely formatted and divided per steps:
+Once you've run the ruby script, it will execute each of the steps in the order they were defined.
 
-![output](https://i.imgur.com/a6F2iAh.png)
+### Error handling
 
-In case of an exception in one of the steps, the execution of the script is aborted instantly.
+In case of an error in one of the steps, the script is stopped right away without executing further steps.
+
+### Output
+
+Nicely formatted output is the primary motivation behind the Script. Most of the time you want to separate your commands output, in order to help investigation or debugging later.
+
+Let's take for an example the following script:
+
+```ruby
+#!/usr/bin/env ruby
+
+require "script"
+
+Script.define do |s|
+  s.step("setup") do
+    system("bundle install") 
+  end
+
+  s.step("build") do
+    system("bundle exec rake spec")
+  end
+
+  s.step("deploy") do
+    system("gem push script-*")
+  end
+end
+```
+
+It will produce the following output:
+
+```
+--------------------------------------------------------------------------------
+Started: setup
+
+Using rake 10.4.2
+Using bundler 1.16.0
+Using byebug 9.0.6
+Using colorize 0.8.1
+Using diff-lcs 1.3
+Using rspec-support 3.7.0
+Using rspec-core 3.7.0
+Using rspec-expectations 3.7.0
+Using rspec-mocks 3.7.0
+Using rspec 3.7.0
+Using rspec-autotest 1.0.0
+Using script 1.0.0 from source at `.`
+Bundle complete! 6 Gemfile dependencies, 12 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+
+Succeded: setup
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Started: build
+
+/usr/bin/ruby2.3 -I/var/lib/gems/2.3.0/gems/rspec-core-3.7.0/lib:/var/lib/gems/2.3.0/gems/rspec-support-3.7.0/lib /var/lib/gems/2.3.0/gems/rspec-core-3.7.0/exe/rspec --pattern spec/\*\*\{,/\*/\*\*\}/\*_spec.rb
+
+Script::Engine
+  #register_step
+    registers new step
+  #run
+    runs all registered steps
+
+Script::Output
+  #started
+    returns the output to be printed before the step is run
+  #result
+    when the step has succeded
+      returns the output with the result after the step has finished
+    when the step has failed
+      returns the output with the result after the step has finished
+
+Script
+  has a version number
+  #step
+    registers the step on the engine
+  #run
+    runs each step from the script
+
+Finished in 0.01004 seconds (files took 0.07973 seconds to load)
+8 examples, 0 failures
+
+
+Succeded: build
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Started: deploy
+
+Pushing gem to https://rubygems.org...
+Successfully registered gem: script (1.0.0)
+
+Succeded: deploy
+--------------------------------------------------------------------------------
+```
 
 ### Shareables
 
