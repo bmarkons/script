@@ -8,6 +8,7 @@ The Script is everything you need to make the most of Ruby - a fabulous scriptin
 - [Setup](#setup)
 - [Usage](#usage)
   - [Steps](#steps)
+  - [Error handling](#error-handling)
   - [Output](#output)
   - [Shareables](#shareables)
 - [Contributing](#contributing)
