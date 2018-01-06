@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    script (0.0.3)
+    script (0.0.4)
       colorize
 
 GEM
