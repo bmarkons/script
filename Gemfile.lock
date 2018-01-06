@@ -31,7 +31,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
+  bundler (~> 1.16)
   byebug
   rake (~> 10.0)
   rspec (~> 3.0)
