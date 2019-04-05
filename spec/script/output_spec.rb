@@ -5,7 +5,7 @@ RSpec.describe Script::Output do
 
   describe "#started" do
     it "returns the output to be printed before the step is run" do
-      expect(Script::Output.started(@step)).to eq(
+      expect(cript::Output.started(@step)).to eq(
         "#{'-' * 80}\nStarted: #{@step.headline}\n".colorize(:yellow)
       )
     end
