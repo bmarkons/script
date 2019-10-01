@@ -10,6 +10,9 @@ blocks:
       prologue:
         commands:
           - checkout
+          - cache restore
+      commands:
+        - cache store
       jobs:
         - name: bundle install
           commands:
@@ -20,6 +23,7 @@ blocks:
         commands:
           - checkout
           - cache restore
+          - bundle install --deployment --path vendor/bundle
           - gem install semaphore_test_boosters
       jobs:
         - name: bundle exec rspec
