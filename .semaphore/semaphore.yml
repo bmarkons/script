@@ -11,12 +11,14 @@ blocks:
         commands:
           - checkout
           - cache restore
-      commands:
-        - cache store
       jobs:
         - name: bundle install
           commands:
             - bundle install --deployment --path vendor/bundle
+      epilogue:
+        on_pass:
+          commands:
+            - cache store
   - name: RSpec
     task:
       prologue:
