@@ -1,0 +1,34 @@
+version: v1.0
+name: Ruby
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Install dependencies
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+      jobs:
+        - name: bundle install
+          commands:
+            - bundle install --deployment --path vendor/bundle
+      epilogue:
+        on_pass:
+          commands:
+            - cache store
+  - name: RSpec
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - bundle install --deployment --path vendor/bundle
+          - gem install semaphore_test_boosters
+      jobs:
+        - name: bundle exec rspec
+          parallelism: 4
+          commands:
+            - rspec_booster --job $SEMAPHORE_JOB_INDEX/$SEMAPHORE_JOB_COUNT
