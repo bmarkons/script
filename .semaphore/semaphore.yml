@@ -10,25 +10,17 @@ blocks:
       prologue:
         commands:
           - checkout
-          - cache restore
       jobs:
         - name: bundle install
           commands:
             - bundle install --deployment --path vendor/bundle
-      epilogue:
-        on_pass:
-          commands:
-            - cache store
   - name: RSpec
     task:
       prologue:
         commands:
           - checkout
           - cache restore
-          - bundle install --deployment --path vendor/bundle
-          - gem install semaphore_test_boosters
       jobs:
         - name: bundle exec rspec
-          parallelism: 4
           commands:
-            - rspec_booster --job $SEMAPHORE_JOB_INDEX/$SEMAPHORE_JOB_COUNT
+            - bundle exec rspec
