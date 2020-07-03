@@ -1,11 +1,7 @@
-FROM ruby:2.5-slim
+FROM ruby:2.5
 
-WORKDIR /app
-
-# 3: Install gems
-ADD Gemfile .
-ADD Gemfile.lock .
-
-RUN bundle install
+RUN gem install semaphore_test_boosters
 
 ADD . /app
+WORKDIR /app
+RUN bundle install
